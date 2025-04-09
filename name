@@ -1,0 +1,102 @@
+//Write a program to add, subtract and multiply two complex numbers 
+// using structures to function
+
+#include <stdio.h>
+#include <math.h>
+
+struct complex {
+	int real;
+	int im;
+};
+
+void get_complex(struct complex* c){
+	printf("Lütfen real kısmı giriniz: ");
+	scanf_s("%d", &(*c).real   );
+	printf("Lütfen imaginer kısmı giriniz: ");
+	scanf_s("%d", &(*c).im);
+}
+
+void print_complex(struct complex c) {
+	char sign;
+	if (c.im > 0) {
+		sign = '+';
+	}else {
+		sign = '-';
+	}
+	printf("%d %c %di", c.real, sign, abs(c.im));
+}
+
+struct complex sum_complex(struct complex c1, struct complex c2) {
+	struct complex sum;
+	sum.real = c1.real + c2.real;
+	sum.im = c1.im + c2.im;
+	return sum;
+}
+
+struct complex substraction_complex(struct complex c1, struct complex c2) {
+	struct complex result;
+	result.real = c1.real - c2.real;
+	result.im = c1.im - c2.im;
+	return result;
+}
+// 1 + 2i		5+3i
+struct complex multiply_complex(struct complex c1, struct complex c2) {
+	struct complex rectangle;
+	rectangle.real = c1.real * c2.real - c1.im * c2.im ;
+	rectangle.im = c1.real * c2.im + c1.im * c2.real;
+	return rectangle;
+}
+
+
+void print_sum(struct complex c1, struct complex c2, struct complex sum) {
+	print_complex(c1);
+	printf("   +   ");
+	print_complex(c2);
+	printf("   =   ");
+	print_complex(sum);
+	printf("\n");
+
+}
+
+void print_multiple(struct complex c1, struct complex c2, struct complex multi) {
+	print_complex(c1);
+	printf("   *   ");
+	print_complex(c2);
+	printf("   =   ");
+	print_complex(multi);
+	printf("\n");
+
+}
+
+void print_subst(struct complex c1, struct complex c2, struct complex result) {
+	print_complex(c1);
+	printf("   -   ");
+	print_complex(c2);
+	printf("   =   ");
+	print_complex(result);
+	printf("\n");
+
+}
+
+
+
+
+int main(void) {
+	struct complex c1,c2;
+	get_complex(&c1);
+	//print_complex(c1);
+	get_complex(&c2);
+	//print_complex(c2);
+	//sum_complex(c1,c2);
+	//struct complex sum = (sum_complex(c1, c2));
+	//print_sum(c1, c2, sum);
+	struct complex a = multiply_complex(c1, c2);
+	print_multiple(c1, c2, a);
+
+	struct complex b = substraction_complex(c1, c2);
+	print_multiple(c1, c2, b);
+
+
+	return 0;
+}
+
