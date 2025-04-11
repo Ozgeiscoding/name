@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int lenghtofstring(const char* str_ptr) {
+	int sayac = 0;
+	while (*str_ptr != '\0') {
+		sayac++;
+		str_ptr++;
+	}
+	return sayac;
+}
+
+void print_reverse(const char* p) {
+	for (int i = lenghtofstring(p) - 1; i >= 0; i--) {
+		if (p[i] == '\0') {
+			continue;
+		}
+		printf("%c", p[i]);
+	}
+}
+
+int main(void) {
+
+	const char* p = "Hello";
+	//printf("%d", lenghtofstring(p));
+	print_reverse(p);
+
+
+
+	return 0;
+}
