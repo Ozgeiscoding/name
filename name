@@ -33,13 +33,13 @@ struct complex sum_complex(struct complex c1, struct complex c2) {
 	return sum;
 }
 
-struct complex substraction_complex(struct complex c1, struct complex c2) {
+struct complex subtraction_complex(struct complex c1, struct complex c2) {
 	struct complex result;
 	result.real = c1.real - c2.real;
 	result.im = c1.im - c2.im;
 	return result;
 }
-// 1 + 2i		5+3i
+
 struct complex multiply_complex(struct complex c1, struct complex c2) {
 	struct complex rectangle;
 	rectangle.real = c1.real * c2.real - c1.im * c2.im ;
@@ -47,37 +47,14 @@ struct complex multiply_complex(struct complex c1, struct complex c2) {
 	return rectangle;
 }
 
-
-void print_sum(struct complex c1, struct complex c2, struct complex sum) {
+void print_op(struct complex c1, struct complex c2, struct complex result, char c) {
 	print_complex(c1);
-	printf("   +   ");
-	print_complex(c2);
-	printf("   =   ");
-	print_complex(sum);
-	printf("\n");
-
-}
-
-void print_multiple(struct complex c1, struct complex c2, struct complex multi) {
-	print_complex(c1);
-	printf("   *   ");
-	print_complex(c2);
-	printf("   =   ");
-	print_complex(multi);
-	printf("\n");
-
-}
-
-void print_subst(struct complex c1, struct complex c2, struct complex result) {
-	print_complex(c1);
-	printf("   -   ");
+	printf("   %c   ", c);
 	print_complex(c2);
 	printf("   =   ");
 	print_complex(result);
 	printf("\n");
-
 }
-
 
 
 
@@ -87,16 +64,31 @@ int main(void) {
 	//print_complex(c1);
 	get_complex(&c2);
 	//print_complex(c2);
-	//sum_complex(c1,c2);
-	//struct complex sum = (sum_complex(c1, c2));
-	//print_sum(c1, c2, sum);
-	struct complex a = multiply_complex(c1, c2);
-	print_multiple(c1, c2, a);
+	char op = 'n';
+	printf("Yapmak istediğiniz işlemi girin: ");
+	scanf_s(" %c", &op, 1);
 
-	struct complex b = substraction_complex(c1, c2);
-	print_multiple(c1, c2, b);
+	struct complex result;
+	switch (op) {
+		case '+':
+			result = sum_complex(c1, c2);
+			print_op(c1, c2, result, op);
+			break;
+		case '-':
+			result = subtraction_complex(c1, c2);
+			print_op(c1, c2, result, op);
+			break;
+		case '*':
+			result = multiply_complex(c1, c2);
+			print_op(c1, c2, result, op);
+			break;
+		default:
+			puts("Geçersiz seçim");
+			return 1;
+	}
+
+
 
 
 	return 0;
 }
-
