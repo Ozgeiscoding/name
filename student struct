@@ -1,0 +1,50 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#define SIZE 3
+typedef struct {
+	char name[20];
+	int no;
+	float ortalama;
+} student;
+
+int max_function(student* students) {
+	float max = students[0].ortalama;
+	for (int i = 0; i < SIZE; i++) {
+		if (students[i].ortalama > max) {
+			max = students[i].ortalama;
+		}
+	}
+	return max;
+}
+
+void print_max(student* students, float max) {
+	for (int i = 0; i < SIZE; i++) {
+		if (students[i].ortalama == max) {
+			printf("En basarili ogrencinin ismi: %s, nosu: %d, notu:%.2f\n", students[i].name, students[i].no, max);
+		}
+	}
+}
+
+int main(void) {
+	student students[SIZE];
+	for (int i = 0; i < SIZE; i++) {
+		printf("Enter students name: ");
+		scanf("%s", students[i].name);
+		printf("Enter students no: ");
+		scanf("%d", &students[i].no);
+		printf("Enter students mark: ");
+		scanf("%f", &(students[i].ortalama));
+		printf("\n\n");
+	}
+
+	for (int i = 0; i < SIZE; i++) {
+		printf("%s\n", students[i].name);
+		printf("%d\n", students[i].no);
+		printf("%.2f\n\n", students[i].ortalama);
+	}
+
+	print_max(students, max_function(students));
+
+	return 0;
+}
