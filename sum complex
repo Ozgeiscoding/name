@@ -5,22 +5,48 @@ typedef struct {
 	float im;
 }complex_t;
 
-void function(complex_t c1, complex_t c2, complex_t* sum) {
-	//(*sum).real = c1.real + c2.real;
-	//(*sum).im = c1.im + c2.im;
+void get_complex(complex_t* cPtr);
+void print_complex(complex_t c);
+float abs(float num);
+void sum_complex(complex_t c1, complex_t c2, complex_t* sum);
+
+int main(void) {
+	complex_t c1, c2, sum;
+	get_complex(&c1);
+	print_complex(c1);
+	get_complex(&c2);
+	print_complex(c2);
+	sum_complex(c1, c2, &sum);
+	print_complex(sum);
+	return 0;
+}
+
+void get_complex(complex_t* cPtr) {
+	printf("Real kısmı giriniz: ");
+	scanf_s("%f", &(cPtr->real));
+	printf("İmaginer kismi giriniz: ");
+	scanf_s("%f", &(cPtr->im));
+}
+
+void print_complex(complex_t c) {
+	if (c.im >= 0) {
+		printf("%.2f + %.2fi\n", c.real, c.im);
+	}
+	else {
+		printf("%.2f - %.2fi\n", c.real, abs(c.im));
+	}
+}
+
+void sum_complex(complex_t c1, complex_t c2, complex_t* sum) {
 	sum->real = c1.real + c2.real;
 	sum->im = c1.im + c2.im;
 }
 
-int main(void) {
-	
-	complex_t c1,c2,sum;
-	c1.real = 5;
-	c1.im = 6;
-	c2.real = 2;
-	c2.im = 3;
-	function(c1, c2, &sum);
-	printf("%f + %fi", sum.real, sum.im);
-
-	return 0;
+float abs(float num) {
+	if (num >= 0) {
+		return num;
+	}
+	else {
+		return -num;
+	}
 }
